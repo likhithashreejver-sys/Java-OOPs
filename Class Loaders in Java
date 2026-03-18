@@ -1,0 +1,64 @@
+
+classloaders are used to load the .class files into memory.
+Whenever we write the java program we will save it into .java file , after we compile it will convert into .class files.
+Loading of .class file into memory is been done by Classloaders.
+Classloader is a part of runtime environment and it dynamically loads rge java classes into memory.
+It doesnot load all the classes in memory in one go it loads the classes when it is required by the application.
+
+3 Types of classloaders :
+Bootstrap classloader : It is used to load the .class file which is present in the $JAVA_HOME/jre/lib/rt.jar
+rt.jar was split into modules
+
+Instead of rt.jar, you now have modules like:
+
+java.base
+java.sql
+java.logging
+java.xml
+
+Extension classloader : It is used to load the .class fils which are present in the $JAVA_HOME/jre/lib/ext folder.
+
+Applicatoin classloader: Application ClassLoader loads all application-level classes and third-party libraries from the classpath. 
+
+Whenever JVM come across a particular class first it will check whether the class is loaded or not if its alredy loaded it will use that class if not jvm will asks the class loader to load that particular class.
+
+To load the class class loader follows 3 principles:
+Delegation hirearchy model
+Visiblity
+uniqueness
+
+Visibility principle:
+
+It Says that a class loaded by a parent class loader will be visible to child class loader, but class loaded by the child class loader will not be visible to parent classloader.
+Suppose a class has been loaded by extension class loader then this class will be only visible to extension and application class loader and will not be visble to bootstrap class loader 
+
+Uniqueness principle:
+If the the classes are unique and there is no repetition of classes.
+This also ensures that the classes which are loaded by parent will not be loaded by the child class loader.
+If the parent class loader is not able to load the class then only it will delegate (Work on behalf of) its work to the child class.
+
+ClassNotFoundException is a checked exception when all the three loaders are not able to find the classes we will get this exception.
+ClasscastException : when the 2 classloaders loads the classes with the same name.
+
+What is a Custom ClassLoader?
+A custom classloader is a class that you write to control how and from where Java loads classes, instead of using only the default ones (Bootstrap / Platform / Application).
+Why do we need Custom ClassLoaders?
+
+Default classloaders load classes from:
+
+JDK modules
+Classpath
+Module path
+
+But sometimes you need more control, like:
+Load plugins at runtime
+Load classes from external folders
+Load classes from encrypted files
+Load classes from network / HTTP
+Isolate dependencies (same library, different versions)
+
+
+
+
+
+
